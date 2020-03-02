@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NumberOfApps</string>
+    <string name="apps_message">Number of installed apps is %d</string>
+</resources>
