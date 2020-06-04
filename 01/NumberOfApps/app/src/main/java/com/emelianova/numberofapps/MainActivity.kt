@@ -13,8 +13,28 @@ class MainActivity : AppCompatActivity() {
         countApps()
     }
 
+    private val rootingInstruments = listOf("com.thirdparty.superuser",
+        "eu.chainfire.supersu",
+        "com.noshufou.android.su",
+        "com.koushikdutta.superuser",
+        "com.zachspong.temprootremovejb",
+        "com.ramdroid.appquarantine",
+        "com.topjohnwu.magisk")
+
     private fun countApps() {
-        val nApps = packageManager.getInstalledApplications(0).size
+        val packageList = packageManager.getInstalledApplications(0)
+
+        val nApps = packageList.size
         tvApps.text = getString(R.string.apps_message).format(nApps)
+
+        var message = getString(R.string.not_found)
+        for (pkg in packageList) {
+            val pkgName = pkg.packageName
+            if (rootingInstruments.contains(pkgName)) {
+                message = getString(R.string.found)
+                break
+            }
+        }
+        rootInfo.text = message
     }
 }
